@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset = "UTF-8">
+	<title>Fake News Detection</title>
+	<link href = 'https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+	<link href = 'https://fonts.googleapis.com/css?family=Armio' rel='stylesheet' type='text/css'>
+	<link href = 'https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
+	<link href = 'https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="{{ url_for('static', filename='style7.css') }}"> 
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+	<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+    <script type="text/javascript"> 
+      $(document).ready( function() {
+        $('#foo').delay(4000).fadeOut();
+      });
+    </script>
+
+</head>
+
+<body>
+    <div class="container">
+      <nav class="navbar">
+      <ul>
+          <li><a href="#home">  Home</a><li>
+          <li><a href="#url">Detection through URL</a></li>
+          <li><a href="#text">Detection of text</a></li>
+          <li><a href="#image">Detection through Image</a></li>
+        </ul>
+      </nav>
+      
+       <section id="home">
+        <h1>Welcome to Fake News Detection Site</h1>
+        <h1>Wanna detect whether the news is real or fake...</h1>
+        <h1> Cool You are on the right site!!!</h1>
+        <br>
+		<br>
+		
+        <div id="foo" class="results">
+
+        	{% if prediction1 == ['Fake']%}
+        	<h1 id="url1" style="color:red;">Looking Spam News</h1>
+        	{% elif prediction1 == ['NotUrl']%}
+        	<h1 id="url1" style="color:red;">Not the right way. Please input the correct format !</h1>
+        	{% elif prediction1 == ['Real']%}
+        	<h1 id="url1" style="color:green;">Looking Real News</h1>			
+        	{% endif %}
+        	
+
+        	{% if prediction2 == ['Fake']%}
+        	<h1 style="color:red;">Looking Spam News</h1>
+        	{% elif prediction2 == ['Url']%}
+        	<h1 style="color:red;">Not the right way. Please input the correct format !</h1>
+        	{% elif prediction2 == ['Real']%}
+        	<h1 style="color:green;">Looking Real News</h1>	
+        	{% endif %}
+        	<div class="results 3">
+
+        	{% if prediction3 == ['Fake']%}
+        	<h1 style="color:red;">Looking Spam News</h1>
+        	{% elif prediction3 == ['Real']%}
+        	<h1 style="color:green;">Looking Real News</h1>	
+        	{% elif prediction3 == ['No text']%}
+        	<h1 style="color:red">Oops! Seems like the text in image isn't sufficient to predict or the image has no text</h1>		
+        	{% elif prediction3 == ['No photo']%}
+        	<h1 style="color:red">There is no photo in frame !</h1>	
+        	{% elif prediction3 == ['Wrong format']%}
+        	<h1 style="color:red">Sorry, the image format isn't acceptable !</h1>	
+        	{% endif %}
+        	
+        	</div>
+        	
+      </section>
+      
+      
+      <section id="url">
+        <h1>Categorising news article in a URL</h1>
+        <br>
+        <p class="lead">There are lot many URL's which keep circulating through various ways and with the </p>
+        <p class="lead">ever-increasing amount of information, we always have that curiosity to test it out as Fake or Real</p>
+        <p class="lead">So here is an attempt to it !!!</p>
+        <br>
+        <form action="{{ url_for('predict')}}"method="post">
+			<input type = "text" name = "news" placeholder = "Enter the url of news article"  class = "btn btn-block btn-large btn-width" required="required" />
+			<br>
+			<br>
+			<button class = "btn btn-primary btn-block btn-large btn-width-1" onclick="$('#loading1').show();" >Predict </button>
+		</form>
+		<br>
+		<div id="loading1" style="display:none;"><img src="ajax-loader.gif" alt="" /><h3>Please wait. Loading...</h3></div>
+		<br>
+         
+      </section>
+      
+      <section id="text">
+          <h1>Categorising text news</h1>
+          <br>
+          <p class="lead">Any text message can be designated as fake or real. Not sure with it?</p>
+          <p class="lead">Have a try :)</p>
+          <br>
+          <form action="{{ url_for('predict_text')}}"method="post">
+			<input type = "text" name = "news" placeholder = "Enter the text based news" class = "btn btn-block btn-large btn-width" required="required" />
+			<br>
+			<br>
+			<button class = "btn btn-primary btn-block btn-large btn-width-1" onclick="$('#loading2').show();" onclick="myFunction()">Predict</button>
+		</form>	
+		<br>
+		<div id="loading2" style="display:none;"><img src="ajax-loader.gif" alt="" /><h3>Please wait. Loading...</h3></div>
+		<br>
+      </section>
+      
+      <section id="image">
+          <h1>Categorising text in an Image</h1>
+          <br>
+           <p class="lead">Images are not wholly images always , but can also have text.</p>
+           <p class="lead">Grade that text and proceed further!!!</p>
+          <br>
+         
+          <form action="{{ url_for('predict_image')}}" method="post" enctype='multipart/form-data'>
+          		<input type = "file" name = "photo" class = "btn btn-dark btn-block btn-large btn-width" required="required" />
+			<br>
+			<br>
+			<button class = "btn btn-primary btn-block btn-large btn-width-1" onclick="$('#loading3').show();">Predict</button>
+		</form>	
+		<br>
+		<div id="loading3" style="display:none;"><img src="ajax-loader.gif" alt="" /><h3>Please wait. Loading...</h3></div>
+		<br>
+      </section>
+      
+    </div>
+	
+</body>
+</html>
