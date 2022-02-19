@@ -9,19 +9,17 @@ Steps to execute:
 
 2)Create an environment or a virtual environment to execute the project downloaded.
 
-3).py files having implementation code of the web interface are under the "WebInterface" folder inside the main project folder.
-	There are 3 folders within WebInterface folder "English"," Hindi", and "Kannada" which contain all the files required for implementation of the 	frontend.
-	Inturn under each of these folder there are 2 other folders static (containing style file for UI) and templates (containing an html file for web 	interface), retain this directory structure as it is(as they are uploaded onto the repo) to avoid issues related to file paths.
-	app_language.py are the API files for the frontend.(there are 3 of them one for each language)
+3).py file having implementation code of the web interface is under the "Web Interface" folder inside the main project folder.
+	Inturn Web Interface has 2 other folders static (containing style file for UI) and templates (containing an html file for web interface), retain this directory structure as it is(as they are uploaded onto the repo) to avoid issues related to file paths.
+	app.py is the API file for the frontend.(Present under the Web Interface folder)
 
-4)Inside main project directory there exists "Models" folder which contain 4 pickle files (2 for english[1 for prediction through text and the other for prediction 	via URL], 1 for kannada and 1 for hindi) store these dumped model files in some directory(better to be under parent directory).
+4)Inside main project directory there exists "Models" folder which contain 4 pickle files (2 for english[1 for prediction through text and the other for prediction via URL], 1 for kannada and 1 for hindi) store these dumped model files in some directory(better to be under parent directory).
 
 5)Install all the necessary requirements from "requirements_webinterface.txt" under the main project folder into the execution environment.
 
-6)Files required to run the web interface: pickle files and 3 folders("English","kannada", and "Hindi") mentioned in point 3 + requirements
-	once all 3 are ready inplace run app_english.py app_kannada.py and app_hindi.py(inside WebInterface 	folder) either using Spyder(recommended) 	or as running any normal .py script files.
-	Each of the 3 .py files are to be run seperately.
-	This step completes rendering web interface on port 5000(mentioned in .py files) one at a time.
+6)Files required to run the web interface: pickle files and 'Web Interface' folder mentioned in point 3 + requirements
+	once all 3 are ready inplace run app.py(inside Web Interface folder) either using Spyder(recommended) or as running any normal .py script files.
+	This step completes rendering web interface on port 5000(mentioned in .py files).
 
 
 
